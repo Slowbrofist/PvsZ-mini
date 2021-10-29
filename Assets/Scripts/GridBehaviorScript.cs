@@ -1,13 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GridBehaviorScript : MonoBehaviour
 {
     [SerializeField]
     private float interval = 1f;
     [SerializeField]
-    private bool debugEnabled = true;
+    private readonly bool debugEnabled = true;
+
+    public void Select(InputAction.CallbackContext context) {
+        if (context.started) {
+            RaycastHit hitInfo;
+            Ray ray = Camera.main.ScreenPointToRay(Pointer.current.position.ReadValue());
+            if (Physics.Raycast(ray, out hitInfo)) {
+                SelectGridPoint(hitInfo.point);
+            }
+        }
+    }
+
+    private void SelectGridPoint(Vector3 gridPoint) {
+        var finalPosition = GetGridSpace(gridPoint);
+        GameObject.CreatePrimitive(PrimitiveType.Cube).transform.position = finalPosition;
+    }
 
     public Vector3 GetGridSpace(Vector3 position) {
         //Remove offset

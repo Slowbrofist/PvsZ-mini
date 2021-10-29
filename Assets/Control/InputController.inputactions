@@ -1,0 +1,44 @@
+{
+    "name": "InputController",
+    "maps": [
+        {
+            "name": "PlayerActions",
+            "id": "385bdba3-ee16-498f-be70-0cbb24a9a54f",
+            "actions": [
+                {
+                    "name": "Select",
+                    "type": "Value",
+                    "id": "cf2a9d1e-c0cc-48b3-af86-5cc80cc2bb10",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "016f626f-bb1c-4fce-b52f-6e3a849c47c9",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5098a3c6-b2f7-4bd3-bc26-e44acdb7bff1",
+                    "path": "<Touchscreen>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
