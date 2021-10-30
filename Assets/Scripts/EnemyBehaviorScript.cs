@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyBehaviorScript : MonoBehaviour
 {
 
-  /*  [SerializeField]
+   [SerializeField]
     private float Speed = 1f;
     [SerializeField]
     private bool isFlying = true;
@@ -13,17 +13,45 @@ public class EnemyBehaviorScript : MonoBehaviour
     private bool isSlowed = false;
     [SerializeField]
     private float Health = 100f;
-    private float Lifespan = 0f;*/
+    [SerializeField]
+    private Rigidbody rigid;
+    [SerializeField]
+    private float Lifespan = 0f;
+    private Vector3 speedVector;
+    private float offset;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        speedVector = new Vector3(Speed, 0, 0);
+        offset = 1;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        Lifespan += Time.deltaTime;
+        rigid.velocity = speedVector * Time.deltaTime * offset;
+    }
+
+    public void ReceiveDamage(float dmg) {
+        Health -= dmg;
+        if (Health <= 0) {
+            Destroy(this.gameObject);
+        }
+    }
+
+    public void ApplySlow() {
+        if (isFlying) {
+            isSlowed = true;
+            offset = .5f;
+        }
+    }
+
+    public void RemoveSlow(bool slowCheck) {
+        if (slowCheck) {
+            isSlowed = false;
+            offset = 1;
+        }
     }
 }
