@@ -17,6 +17,7 @@ public class EnemyBehaviorScript : MonoBehaviour
     private Rigidbody rigid;
     [SerializeField]
     private float Lifespan = 0f;
+    public bool isExplosive = false;
     private Vector3 speedVector;
     private float offset;
 
@@ -52,6 +53,14 @@ public class EnemyBehaviorScript : MonoBehaviour
         if (slowCheck) {
             isSlowed = false;
             offset = 1;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision) {
+        if (collision.gameObject.tag.Equals("Tower") && isExplosive && Lifespan >= 10f){
+            Debug.Log(collision.gameObject.tag);
+            Destroy(collision.gameObject);
+            Destroy(this.gameObject);
         }
     }
 }
