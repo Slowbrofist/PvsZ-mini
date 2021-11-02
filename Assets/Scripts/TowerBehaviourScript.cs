@@ -50,6 +50,11 @@ public class TowerBehaviourScript : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+        if (other.gameObject == InterfaceBehaviorScript.gm.cursor) InterfaceBehaviorScript.gm.isTaken = true;
+    }
+
+    public void OnCollisionExit(Collision other) {
+        if (other.gameObject == InterfaceBehaviorScript.gm.cursor) InterfaceBehaviorScript.gm.isTaken = false;
     }
 
     public void OnTriggerStay(Collider other) {
@@ -65,6 +70,10 @@ public class TowerBehaviourScript : MonoBehaviour
             }
             particleGenerator.SetActive(true);
         }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        if (currentTarget.gameObject == other.gameObject) currentTarget = null;
     }
 
     public float GetAngleFromVector(Vector3 vector) {

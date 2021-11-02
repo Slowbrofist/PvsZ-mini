@@ -5,6 +5,9 @@ using UnityEngine;
 public class InterfaceBehaviorScript : MonoBehaviour
 {
     public static int selected;
+    public GameObject cursor;
+    public bool isTaken;
+    public bool isSelected;
     public static InterfaceBehaviorScript gm;
     public PrefabControlScript pfControl;
 
@@ -23,10 +26,18 @@ public class InterfaceBehaviorScript : MonoBehaviour
         selected = index;
     }
 
+    public void Update() {
+       if(!isTaken && isSelected) SpawnTower(cursor.transform.position);
+    }
+
+    public void MoveCursor (Vector3 movePoint){
+        cursor.transform.position = movePoint;
+        isSelected = movePoint.x < 1;
+    }
+
     public void SpawnTower( Vector3 spawnPoint) {
         if (selected != 99) {
             Instantiate(pfControl.towerPfArray[selected], spawnPoint, Quaternion.identity);
-            selected = 99;
         }
     }
 }
