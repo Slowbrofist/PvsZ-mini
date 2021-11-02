@@ -9,7 +9,6 @@ public class GridBehaviorScript : MonoBehaviour
     private readonly bool debugEnabled = true;
     private Vector3 dudVector3 = new Vector3();
 
- 
     public void Select(InputAction.CallbackContext context) {
         if (context.started) {
             RaycastHit hitInfo;
@@ -20,10 +19,10 @@ public class GridBehaviorScript : MonoBehaviour
         }
     }
 
-    private void SelectGridPoint(Vector3 gridPoint) {
+    public void SelectGridPoint(Vector3 gridPoint) {
         var finalPosition = GetGridSpace(gridPoint);
         if (finalPosition != dudVector3) {
-            GameObject.CreatePrimitive(PrimitiveType.Cube).transform.position = finalPosition;
+           InterfaceBehaviorScript.gm.SpawnTower(finalPosition);
         }
     }
 
@@ -32,7 +31,7 @@ public class GridBehaviorScript : MonoBehaviour
         position -= transform.position;
         //Approximate nearest cell
         int xCount = Mathf.RoundToInt(position.x / interval);
-        int yCount = Mathf.RoundToInt(position.y / interval);
+//        int yCount = Mathf.RoundToInt(position.y / interval);
         int zCount = Mathf.RoundToInt(position.z / interval);
 
         //Check if out of bounds.
@@ -41,7 +40,7 @@ public class GridBehaviorScript : MonoBehaviour
         }
 
         //Set new cell
-        Vector3 result = new Vector3(xCount * interval, yCount * interval, zCount * interval);
+        Vector3 result = new Vector3(xCount * interval, .5f , zCount * interval);
         //Add back offset and return result
         result += transform.position;
         return result;
@@ -52,6 +51,7 @@ public class GridBehaviorScript : MonoBehaviour
             for (float x = 17; x < 26; x += interval) {
                 for (float z = 17; z < 23; z += interval) {
                     var point = GetGridSpace(new Vector3(x + transform.position.x, 0f, z + transform.position.z));
+                    point.y = 0f;
                     Gizmos.DrawSphere(point, 0.1f);
                 }
             }
