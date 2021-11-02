@@ -33,6 +33,10 @@ public class EnemyBehaviorScript : MonoBehaviour
     {
         Lifespan += Time.deltaTime;
         rigid.velocity = speedVector * Time.deltaTime * offset;
+        if (transform.position.x > 10) {
+            Debug.Log("Inimigo passou!");
+            Destroy(this.gameObject);
+        }
     }
 
     public void ReceiveDamage(float dmg) {

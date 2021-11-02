@@ -13,7 +13,7 @@ public class TowerBehaviourScript : MonoBehaviour
     [SerializeField]
     private float health = 100;
     [SerializeField]
-    private GameObject particleGenerator;
+    private GameObject attackObject;
     private float timer = 0f;
     private BoxCollider aimRange;
 
@@ -21,7 +21,7 @@ public class TowerBehaviourScript : MonoBehaviour
     void Start()
     {
         aimRange = this.gameObject.GetComponent<BoxCollider>();
-        particleGenerator.SetActive(false);
+        attackObject.SetActive(false);
     }
 
     void Update()
@@ -36,7 +36,7 @@ public class TowerBehaviourScript : MonoBehaviour
             }
         }
         if (timer > interval) timer = interval;
-        if(currentTarget == null) particleGenerator.SetActive(false);                       
+        if(currentTarget == null) attackObject.SetActive(false);                       
     }
 
     public void DealDamage(EnemyBehaviorScript enemy) {
@@ -50,12 +50,9 @@ public class TowerBehaviourScript : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
-        if (other.gameObject == InterfaceBehaviorScript.gm.cursor) InterfaceBehaviorScript.gm.isTaken = true;
     }
 
-    public void OnCollisionExit(Collision other) {
-        if (other.gameObject == InterfaceBehaviorScript.gm.cursor) InterfaceBehaviorScript.gm.isTaken = false;
-    }
+
 
     public void OnTriggerStay(Collider other) {
         if (other.tag.Equals("Enemy")) {
@@ -68,12 +65,12 @@ public class TowerBehaviourScript : MonoBehaviour
             if (other.transform.position.x > currentTarget.transform.position.x) {
                 currentTarget = other.gameObject.GetComponent<EnemyBehaviorScript>();
             }
-            particleGenerator.SetActive(true);
+            attackObject.SetActive(true);
         }
     }
 
     private void OnTriggerExit(Collider other) {
-        if (currentTarget.gameObject == other.gameObject) currentTarget = null;
+        if (currentTarget != null && currentTarget.gameObject == other.gameObject) currentTarget = null;
     }
 
     public float GetAngleFromVector(Vector3 vector) {

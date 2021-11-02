@@ -22,7 +22,7 @@ public class GridBehaviorScript : MonoBehaviour
     public void SelectGridPoint(Vector3 gridPoint) {
         var finalPosition = GetGridSpace(gridPoint);
         if (finalPosition != dudVector3) {
-           InterfaceBehaviorScript.gm.SpawnTower(finalPosition);
+           InterfaceBehaviorScript.gm.MoveCursor(finalPosition);
         }
     }
 

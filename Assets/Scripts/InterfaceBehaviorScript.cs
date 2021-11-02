@@ -6,8 +6,8 @@ public class InterfaceBehaviorScript : MonoBehaviour
 {
     public static int selected;
     public GameObject cursor;
-    public bool isTaken;
-    public bool isSelected;
+    public bool isTaken = false;
+    public bool isSelected = false;
     public static InterfaceBehaviorScript gm;
     public PrefabControlScript pfControl;
 
@@ -32,7 +32,7 @@ public class InterfaceBehaviorScript : MonoBehaviour
 
     public void MoveCursor (Vector3 movePoint){
         cursor.transform.position = movePoint;
-        isSelected = movePoint.x < 1;
+        isSelected = movePoint.x > 0;
     }
 
     public void SpawnTower( Vector3 spawnPoint) {
