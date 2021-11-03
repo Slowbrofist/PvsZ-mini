@@ -12,7 +12,7 @@ public class InterfaceBehaviorScript : MonoBehaviour
     public PrefabControlScript pfControl;
 
     private void Awake() {
-        selected = 99;
+        selected = 3;
         if (gm == null) {
             gm = this;
             DontDestroyOnLoad(this);
@@ -24,6 +24,7 @@ public class InterfaceBehaviorScript : MonoBehaviour
 
     public void SelectIndex(int index) {
         selected = index;
+        CursorBehaviorScript.SetMoveTower(selected == 3);
     }
 
     public void Update() {
@@ -36,7 +37,7 @@ public class InterfaceBehaviorScript : MonoBehaviour
     }
 
     public void SpawnTower( Vector3 spawnPoint) {
-        if (selected != 99) {
+        if (selected < pfControl.towerPfArray.Length) {
             Instantiate(pfControl.towerPfArray[selected], spawnPoint, Quaternion.identity);
         }
     }

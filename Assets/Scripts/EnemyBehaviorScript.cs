@@ -13,8 +13,6 @@ public class EnemyBehaviorScript : MonoBehaviour
     private float Health = 100f;
     [SerializeField]
     private Rigidbody rigid;
-    [SerializeField]
-    private float Lifespan = 0f;
     public bool isExplosive = false;
     private Vector3 speedVector;
     private float offset;
@@ -29,9 +27,8 @@ public class EnemyBehaviorScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Lifespan += Time.deltaTime;
         rigid.velocity = speedVector * Time.deltaTime * offset;
-        if (transform.position.x > 10) {
+        if (transform.position.x > 12) {
             Debug.Log("Inimigo passou!");
             Destroy(this.gameObject);
         }
@@ -57,8 +54,7 @@ public class EnemyBehaviorScript : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.tag.Equals("Tower") && isExplosive && Lifespan >= 10f){
-            Debug.Log(collision.gameObject.tag);
+        if (collision.gameObject.tag.Equals("Tower") && isExplosive){
             Destroy(collision.gameObject);
             Destroy(this.gameObject);
         }

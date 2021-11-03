@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 5498936409810252842}
   - component: {fileID: 5498936409810252843}
   - component: {fileID: 5498936409810252844}
+  - component: {fileID: 8671882690533065605}
   m_Layer: 2
   m_Name: FanTower
   m_TagString: Tower
@@ -141,3 +142,15 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &8671882690533065605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5498936409810252846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63e97231493642a4497c5c52dbcf17ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

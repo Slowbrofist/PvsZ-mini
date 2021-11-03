@@ -4934,3 +4934,4 @@ MonoBehaviour:
   health: 1000
   attackObject: {fileID: 6576320019005428710}
   attacksFlying: 0
+  towerRotate: 0

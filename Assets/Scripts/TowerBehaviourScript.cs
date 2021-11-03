@@ -16,6 +16,8 @@ public class TowerBehaviourScript : MonoBehaviour
     private GameObject attackObject;
     [SerializeField]
     private bool attacksFlying = false;
+    [SerializeField]
+    private bool towerRotate = true;
     private float timer = 0f;
     private BoxCollider aimRange;
 
@@ -29,9 +31,11 @@ public class TowerBehaviourScript : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if(currentTarget != null) {          
-            Vector3 targetDirection = currentTarget.transform.position- transform.position;
-            transform.rotation = Quaternion.LookRotation(targetDirection);
+        if(currentTarget != null) {
+            if (towerRotate) {
+                Vector3 targetDirection = currentTarget.transform.position - transform.position;
+                transform.rotation = Quaternion.LookRotation(targetDirection);
+            }
             if (timer >= interval) {
                 DealDamage(currentTarget);
                 timer -= interval;
