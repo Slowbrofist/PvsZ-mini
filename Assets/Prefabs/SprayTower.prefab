@@ -128,7 +128,8 @@ MonoBehaviour:
   damage: 10
   interval: 0.5
   health: 100
-  particleGenerator: {fileID: 2856076448479948790}
+  attackObject: {fileID: 2856076448479948790}
+  attacksFlying: 1
 --- !u!1 &2856076448479948790
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,8 +8,6 @@ public class EnemyBehaviorScript : MonoBehaviour
    [SerializeField]
     private float Speed = 1f;
     [SerializeField]
-    private bool isFlying = true;
-    [SerializeField]
     private bool isSlowed = false;
     [SerializeField]
     private float Health = 100f;
@@ -47,10 +45,8 @@ public class EnemyBehaviorScript : MonoBehaviour
     }
 
     public void ApplySlow() {
-        if (isFlying) {
             isSlowed = true;
             offset = .5f;
-        }
     }
 
     public void RemoveSlow(bool slowCheck) {
@@ -65,6 +61,18 @@ public class EnemyBehaviorScript : MonoBehaviour
             Debug.Log(collision.gameObject.tag);
             Destroy(collision.gameObject);
             Destroy(this.gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.tag.Equals("FanHitbox") && gameObject.tag.Equals("FlyingEnemy") ) {
+            ApplySlow();
+        }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        if (other.gameObject.tag.Equals("FanHitbox") && gameObject.tag.Equals("FlyingEnemy")) {
+            RemoveSlow(isSlowed);
         }
     }
 }

@@ -14,6 +14,8 @@ public class TowerBehaviourScript : MonoBehaviour
     private float health = 100;
     [SerializeField]
     private GameObject attackObject;
+    [SerializeField]
+    private bool attacksFlying = false;
     private float timer = 0f;
     private BoxCollider aimRange;
 
@@ -55,7 +57,7 @@ public class TowerBehaviourScript : MonoBehaviour
 
 
     public void OnTriggerStay(Collider other) {
-        if (other.tag.Equals("Enemy")) {
+        if (other.tag.Equals("Enemy") || (other.tag.Equals("FlyingEnemy") && attacksFlying)) {
             //default to first target in range
             if (currentTarget == null) {
                 currentTarget = other.gameObject.GetComponent<EnemyBehaviorScript>();
@@ -71,12 +73,5 @@ public class TowerBehaviourScript : MonoBehaviour
 
     private void OnTriggerExit(Collider other) {
         if (currentTarget != null && currentTarget.gameObject == other.gameObject) currentTarget = null;
-    }
-
-    public float GetAngleFromVector(Vector3 vector) {
-        vector = vector.normalized;
-        float n = Mathf.Atan2(vector.z, vector.x) * Mathf.Rad2Deg;
-        if (n < 0) n += 360;
-        return n;
     }
 }
