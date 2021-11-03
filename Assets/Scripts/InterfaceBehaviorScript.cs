@@ -27,7 +27,7 @@ public class InterfaceBehaviorScript : MonoBehaviour
         CursorBehaviorScript.SetMoveTower(selected == 3);
     }
 
-    public void Update() {
+    public void FixedUpdate() {
        if(!isTaken && isSelected) SpawnTower(cursor.transform.position);
     }
 

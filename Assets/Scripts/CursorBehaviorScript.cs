@@ -7,7 +7,7 @@ public class CursorBehaviorScript : MonoBehaviour
     public Transform selectedTower;
     public static bool moveTower = false;
 
-    private void Update() {
+    private void FixedUpdate() {
         if (moveTower && selectedTower != null && !InterfaceBehaviorScript.gm.isTaken) {
             selectedTower.position = transform.position;
         }
